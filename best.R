@@ -18,11 +18,11 @@ best <- function(state,outcome){
         shortset$heartfailure<-suppressWarnings(as.numeric(shortset$heartfailure))
         shortset$pneumonia<-suppressWarnings(as.numeric(shortset$pneumonia))
         if(outcome=="heart attack"){
-                result<-shortset[which.min(!is.na(shortset$heartattack))]
+                result<-shortset[which.min(shortset$heartattack),]
         }else if(outcome=="heart failure"){
-                result<-shortset[which.min(!is.na(shortset$heartfailure))]
+                result<-shortset[which.min(shortset$heartfailure),]
         }else if(outcome=="pneumonia"){
-                result<-shortset[which.min(!is.na(shortset$pneumonia))]
+                result<-shortset[which.min(shortset$pneumonia),]
         }else{}
         return(result[1,1])
 
