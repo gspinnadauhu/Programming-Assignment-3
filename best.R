@@ -13,10 +13,11 @@ best <- function(state,outcome){
         ###Return hispital name in that state with lowerst 30day death rate
         ####heartattack-col 11, heartfail-col 17, pneumonia-col 23
         shortset<-datafile[,c(2,7,11,17,23)]
-        names(shortset)<-c("hospital","state","heartattack","heartfailure","pneumonia")
+        names(shortset)<-c("Hospital","State","heartattack","heartfailure","pneumonia")
         shortset$heartattack<-suppressWarnings(as.numeric(shortset$heartattack))
         shortset$heartfailure<-suppressWarnings(as.numeric(shortset$heartfailure))
         shortset$pneumonia<-suppressWarnings(as.numeric(shortset$pneumonia))
+        shortset<-subset(shortset,State==state,select=c("Hospital","State","heartattack","heartfailure","pneumonia"))
         if(outcome=="heart attack"){
                 result<-shortset[which.min(shortset$heartattack),]
         }else if(outcome=="heart failure"){
@@ -25,5 +26,4 @@ best <- function(state,outcome){
                 result<-shortset[which.min(shortset$pneumonia),]
         }else{}
         return(result[1,1])
-
 }
