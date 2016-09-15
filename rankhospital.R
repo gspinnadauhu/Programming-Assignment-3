@@ -19,14 +19,27 @@ rankhospital <- function(state, outcome, num = "best") {
         ##ordering by outcome in ascending order
         attach(shortset)
         if(outcome=="heart attack"){
-                shortset<-shortset[order(heartattack),]  
+                colnum<-c(3)
+                shortset<-shortset[with(shortset,order(heartattack,Hospital)),c(1,colnum)]  
         }else if(outcome=="heart failure"){
-                shortset<-shortset[order(heartfailure),]
+                colnum<-c(4)
+                shortset<-shortset[with(shortset,order(heartfailure,Hospital)),c(1,colnum)]
         }else{
-                shortset<-shortset[order(pneumonia),] 
+                colnum<-c(5)
+                shortset<-shortset[with(shortset,order(pneumonia,Hospital)),c(1,colnum)] 
         }
-        
-        
+        shortset<-na.omit(shortset)
+        ranking<-c(1:length(shortset$Hospital))
+        shortset<-cbind.data.frame(shortset,ranking)
+        names(shortset)<-c("Hospital","Rate","Rank")
         ## 30-day death rate
+        #if(num=="best"){
+                
+                #shortset[c(1:5),c(1,2,colnum)]    
+        #}else if(num=="worst"){
+        #        length()
+        #        shortset[c(1:5),]        
+        #}
         shortset[c(1:5),]
+        #shortset
 }
