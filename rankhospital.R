@@ -16,6 +16,13 @@ rankhospital <- function(state, outcome, num = "best") {
         shortset$heartfailure<-suppressWarnings(as.numeric(shortset$heartfailure))
         shortset$pneumonia<-suppressWarnings(as.numeric(shortset$pneumonia))
         shortset<-subset(shortset,State==state,select=c("Hospital","State","heartattack","heartfailure","pneumonia"))
+        ##ordering by outcome in ascending order
         
+        #need to figure this out bc it is only returning 1 result
+        outcome<-gsub(" ","",outcome)
+        #rankby<-paste0(gsub(" ","",outcome))
+        #attach(shortset)
+        shortset<-shortset[order(paste(outcome)),]
         ## 30-day death rate
+        shortset[c(1:5),]
 }
