@@ -31,9 +31,16 @@ rankall <- function(outcome, num = "best") {
         ## For each state, find the hospital of the given rank
         names(shortset)<-c("Hospital","State","Rate")
         shortset<-na.omit(shortset)
-        #ranking<-tapply(shortset$Rate,shortset$State,seq_along)
-        #shortset<-cbind.data.frame(shortset,ranking)
         ## Return a data frame with the hospital names and the
         ## (abbreviated) state name
-        do.call(rbind,by(shortset,shortset$State,function(x) x[num,]))
+        if(num=="best"){
+                shortset<-do.call(rbind,by(shortset,shortset$State,function(x) x[1,]))    
+        }else if(num=="worst"){
+                shortset<-do.call(rbind,by(shortset,shortset$State,function(x) x[length(x),]))
+        #}else if(num>length(shortset$Hospital) | num<1){
+        #        return(NA)
+        }else{
+                shortset<-do.call(rbind,by(shortset,shortset$State,function(x) x[num,]))
+        }
+        shortset[,1:2]
 }
