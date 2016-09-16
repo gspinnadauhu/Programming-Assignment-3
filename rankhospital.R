@@ -35,7 +35,7 @@ rankhospital <- function(state, outcome, num = "best") {
         if(num=="best"){
                 shortset[1,]    
         }else if(num=="worst"){
-                shortset[length(shortset$Hospital)]
+                shortset[length(shortset$Hospital),]
         }else if(num>length(shortset$Hospital) | num<1){
                 return(NA)
         }else{
