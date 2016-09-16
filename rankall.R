@@ -36,9 +36,9 @@ rankall <- function(outcome, num = "best") {
         if(num=="best"){
                 shortset<-do.call(rbind,by(shortset,shortset$State,function(x) x[1,]))    
         }else if(num=="worst"){
-                shortset<-do.call(rbind,by(shortset,shortset$State,function(x) x[length(x),]))
-        #}else if(num>length(shortset$Hospital) | num<1){
-        #        return(NA)
+                shortset<-do.call(rbind,by(shortset,shortset$State,function(x) tail(x,n=1)))
+        }else if(num>length(shortset$Hospital) | num<1){
+                return(NA)
         }else{
                 shortset<-do.call(rbind,by(shortset,shortset$State,function(x) x[num,]))
         }
